@@ -7,27 +7,35 @@ submodule in [macdoots](https://github.com/ardnep/macdoots).
 
 ```sh
 git clone --recurse-submodules git@github.com:ardnep/macdoots.git ~/.dotfiles
-sh ~/.dotfiles/.config/opencode/install.sh
 ```
 
 For an existing dotfiles checkout:
 
 ```sh
 git submodule update --init --recursive
-sh .config/opencode/install.sh
 ```
 
 ## Install standalone
 
 ```sh
 git clone https://github.com/ardnep/opencode-config.git ~/opencode-config
-sh ~/opencode-config/install.sh
 ```
 
-The installer respects `XDG_CONFIG_HOME` (default: `~/.config`) and symlinks
-only the three shared configuration files. Existing files are backed up to
-a timestamped directory inside the local OpenCode config directory. Running
-the installer again leaves correct symlinks unchanged.
+## Symlink settings
+
+After cloning, link the shared files individually so `service.json` stays local:
+
+```sh
+config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/opencode"
+repo_dir="$HOME/.dotfiles/.config/opencode" # Or "$HOME/opencode-config".
+mkdir -p "$config_dir"
+for file in opencode.json cli.json opencode-mem.jsonc; do
+    ln -s "$repo_dir/$file" "$config_dir/$file"
+done
+```
+
+Move any existing files to a safe backup location before linking. The commands
+above deliberately refuse to overwrite existing files.
 
 ## Shared settings
 
