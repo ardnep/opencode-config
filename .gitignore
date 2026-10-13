@@ -1,0 +1,14 @@
+# Credentials and machine-specific service settings must never be shared.
+service.json
+auth.json
+.env
+.env.*
+!.env.example
+
+# Local backups and generated dependencies/data.
+backups/
+backups-*/
+node_modules/
+data/
+*.log
+.DS_Store

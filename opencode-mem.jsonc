@@ -1,0 +1,15 @@
+{
+  // Reuse OpenCode's existing OpenAI sign-in and follow the session model.
+  "opencodeProvider": "openai",
+  "opencodeModel": "inherit",
+  "autoCaptureEnabled": true,
+
+  // Keep embeddings and memory storage local.
+  "embeddingModel": "Xenova/nomic-embed-text-v1",
+  "storagePath": "~/.opencode-mem/data",
+
+  // Only expose the memory dashboard on this computer.
+  "webServerEnabled": true,
+  "webServerHost": "127.0.0.1",
+  "webServerPort": 4747
+}
